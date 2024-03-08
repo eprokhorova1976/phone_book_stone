@@ -1,18 +1,18 @@
 phone_book = {}
-path = 'phones.txt'
+path = 'phone_book_stone\phones.txt'
 SEPARATOR = ';'
 
 def open_phone_book():
     global phone_book
     with open(path, 'r', encoding = 'UTF-8') as file:
         data = file.readlines()
-    for u_id, contact in enumerate(data,1):
+    for u_id, contact in enumerate(data, 1):
         phone_book[u_id]=contact.strip().split(SEPARATOR)
 
 def save_phone_book():
     global phone_book
     data = []
-    for contact in phone_book, values():
+    for contact in phone_book.values():
         data.append(SEPARATOR.join(contact))
     data = '\n'.join(data)
     with open (path, 'w', encoding='UTF-8') as file:
@@ -20,11 +20,11 @@ def save_phone_book():
 
 def next_id():
     global phone_book
-    return max(phone_book)+1 if phone_book else 1
+    return max(phone_book) + 1 if phone_book else 1
 
-def add_new_contact (new_contact:list[str]):
+def add_new_contact (new_contact: list[str]):
     global phone_book
-    phone_book [_next_id()] = new_contact
+    phone_book [next_id()] = new_contact
 
 def find_contact(search_word: str) -> dict[int, list[str]]:
     global phone_book
